@@ -1,13 +1,24 @@
 const mongoose = require('mongoose').connect('mongodb://localhost/todos');
 const Schema = mongoose.Schema;
 
-let userSchema = new Schema({
-	username : String,
-	password : String,
-	createdAt : Date,
+const userSchema = Schema({
+	username : {
+		type : String,
+		required : true
+	},
+	password : {
+		type : String,
+		required : true
+	},
+	name : String,
+	email: String,
+	createdAt : {
+		type : Date,
+		default : new Date()
+	},
 	updatedAt : Date
 })
 
-let Users = mongoose.model('Users', userSchema)
+const Users = mongoose.model('Users', userSchema)
 
 module.exports = Users

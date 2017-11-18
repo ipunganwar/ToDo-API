@@ -2,9 +2,18 @@ const mongoose = require('mongoose').connect('mongodb://localhost/todos');
 const Schema = mongoose.Schema;
 
 let taskSchema = new Schema({
-	name : String,
-	status : Boolean,
-	createdAt : Date,
+	task : {
+		type : String,
+		required : true
+	},
+	done : {
+		type: Boolean,
+		default : false
+	},
+	createdAt : {
+		type : Date,
+		default : new Date()
+	},
 	updatedAt : Date
 })
 

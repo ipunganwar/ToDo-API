@@ -9,20 +9,22 @@ const register = (req, res) => {
 			updatedAt : new Date()
 		}
 	)
-	.then(result => { res.status(201).send({msg : 'create', result : result}) })
-		.catch(error => { res.status(500).send(error)})
+	.then(result => { res.status(201).json({msg : 'create', result : result}) })
+	.catch(error => { res.status(500).json(error)})
 }
 
-const findOne = (req, res) => {
-	Users.findOne(
-		{username : req.body.username},
-		{username:true, task:true, doing:true, done:true,updatedAt:true, createdAt:true}
-	)
-	.then(result => { res.status(200).send(result)})
-	.catch(error => { res.status(500).send(error)})
+const find = (req, res) => {
+	Users.find()
+	.populate('tasks')
+	.exec((err, result) =>{ 
+		if (err){
+			res.status(404).json(err)
+		} 
+		res.status(200).json(result)})
+	.catch(error => { res.status(500).json(error)})
 }
 
 module.exports = {
 	register,
-	findOne
+	find
 }
