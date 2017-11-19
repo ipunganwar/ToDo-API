@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+require('dotenv').config()
 
 const encrypt = (plain) => {
 	return new Promise((resolve, reject) => {
