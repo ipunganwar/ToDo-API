@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const tasksController = require('../controllers/tasks')
 
-router.delete('/delete/:id', tasksController.destroy)
-router.get('/find', tasksController.find)
+router.delete('/remove/:id', tasksController.destroy)
+router.get('/list', tasksController.list)
 router.post('/add', tasksController.add)
-router.put('/update/:id', tasksController.update )
+router.post('/done', tasksController.done )
 router.get('/find/:id', tasksController.findbyid )
 
 module.exports = router

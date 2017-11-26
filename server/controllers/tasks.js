@@ -1,6 +1,7 @@
 const Tasks = require('../models/task')
 
 const destroy = (req, res) => {
+	console.log(req.params)
 	Tasks.deleteOne({_id : req.params.id})
 	.then(result => {
 		res.status(200).json(result)
@@ -10,7 +11,7 @@ const destroy = (req, res) => {
 	})
 }
 
-const find = (req, res) => {
+const list = (req, res) => {
 	Tasks.find()
 	.then(result => {
 		res.status(200).json(result)
@@ -36,12 +37,10 @@ const add = (req, res) => {
 	.catch(error => { res.status(500).json(error) })
 }
 
-const update = (req, res) => {
-	Tasks.findOneAndUpdate({ _id : req.params.id })
+const done = (req, res) => {
+	Tasks.findByIdAndUpdate(req.body.id)
 	.then(result => {
-		result.task = req.body.task
-		result.done = (req.body.done === 'true')
-
+		result.done = true
 		result.save()
 		.then(hasil => { res.status(201).json(hasil)})
 		.catch(error => { res.status(500).json(error) })
@@ -55,8 +54,8 @@ const update = (req, res) => {
 
 module.exports = {
 	destroy,
-	find,
+	list,
 	add,
-	update,
+	done,
 	findbyid
 }
