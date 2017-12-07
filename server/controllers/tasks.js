@@ -1,4 +1,4 @@
-const Tasks = require('../models/task')
+	const Tasks = require('../models/task')
 
 const destroy = (req, res) => {
 	console.log(req.params)
@@ -32,13 +32,14 @@ const findbyid = (req, res) => {
 }
 
 const add = (req, res) => {
+	console.log(req.body)
 	Tasks.create(req.body)
 	.then(result => { res.status(201).json(result) })
 	.catch(error => { res.status(500).json(error) })
 }
 
 const done = (req, res) => {
-	Tasks.findByIdAndUpdate(req.body.id)
+	Tasks.findByIdAndUpdate({_id: req.params.id})
 	.then(result => {
 		result.done = true
 		result.save()
