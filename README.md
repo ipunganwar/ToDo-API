@@ -34,5 +34,12 @@ With only npm:
 > npm install
 > npm start
 > npm run dev
+```sh
+$ npm install -g vue-cli
+$ vue init webpack todo-api
+$ cd todo-api
+$ npm install
+$ npm run dev
+```
 
 Access the website API via http://localhost:3000/api 
